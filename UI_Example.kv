@@ -1,0 +1,490 @@
+#:import C kivy.utils.get_color_from_hex
+#: import ew kivy.uix.effectwidget
+#:import Factory kivy.factory.Factory
+#:import Window kivy.core.window.Window
+
+MainWidget:
+
+
+<MainWidget>: 
+    orientation:"vertical"
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            size: self.size
+            pos: self.pos 
+    BoxLayout:
+        size_hint:1,.02
+        canvas.before:
+            Color:
+                rgba: (1,1,1,1)
+
+ #---------------The top bar which includes new user, hide disabled user and save user:-----------------------------------------------------------------------------------------
+
+
+    TopBar:       
+        id:TopBar
+
+
+#--------------------------------------------------------------------------------------------------------
+
+    BoxLayout:
+        size_hint:1,.02
+        canvas.before:
+            Color:
+                rgba: (1,1,1,1)
+    BoxLayout:
+        id:downwindow
+        BoxLayout:
+            size_hint:.05,1
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,1)
+        BoxLayout:
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,1)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [5]
+                Color: 
+                    rgba: (0.5450980392156862, 0.803921568627451, 0.803921568627451, 1)
+                Line:
+                    rounded_rectangle: (self.pos[0],self.pos[1],self.size[0],self.size[1],5,5,5,5,600)
+                    width:.5
+            BoxLayout:
+                size_hint:0.01,1
+            BoxLayout:
+                orientation:"vertical"
+                BoxLayout:
+                    size_hint:1,.01
+                ListHeader:
+                    size_hint:1,.1
+
+
+ #---------------The list area includes user lists:-----------------------------------------------------------------------------------------
+
+
+                ListArea:
+                    UserLists:
+                        id:userlists
+
+#--------------------------------------------------------------------------------------------------------
+
+
+            BoxLayout:
+                size_hint:0.005,1
+
+        BoxLayout:
+            size_hint:.05,1
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,1)
+
+    BoxLayout:
+        size_hint:1,.05
+        canvas.before:
+            Color:
+                rgba: (1,1,1,1)
+
+<TopBar>: #---------------The top bar which includes new user, hide disabled user and save use:-----------------------------------------------------------------------------------------
+    size_hint:1,.1
+    canvas.before:
+        Color:
+            rgba: (0.9254901960784314, 0.9294117647058824, 0.9294117647058824, 1) 
+        Rectangle:
+            size: self.size
+            pos: self.pos 
+   
+    BoxLayout:
+        size_hint:.1,1 
+    BoxLayout:
+        size_hint:.3,1 
+        MyButton:
+            id:NewUser
+            text:"+ New User"
+    BoxLayout:
+        BoxLayout:
+            size_hint:.7,1 
+
+            CheckBox:
+                id:hidecheck
+                halign: 'right'
+                active : root.hidecheck
+                state : "normal"
+                on_press: app.root.HideDisable(self,self.state)
+                color: 1,0,0,1
+            Label:    
+                halign: 'left'
+                valign: 'center'
+                text: "Hide Disabled User"
+                font_size: self.height/4
+                color: 0,0,0,1
+            BoxLayout:
+        BoxLayout:
+
+    BoxLayout:
+        size_hint:.3,1 
+        MyButton:
+            id:SaveUser
+            text:"Save User"
+            disabled:"True"
+    BoxLayout:
+        size_hint:.1,1 
+
+ 
+<ListArea>:  #---------------The list area includes user lists:-----------------------------------------------------------------------------------------
+    bar_color: (219/255,68/255,55/255,1)
+    bar_width: 5
+    color: .2,.2,0,1 
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [20]     
+
+<UserLists>:
+    cols:6
+    orientation:"lr-tb"
+    row_default_height: "35dp"
+    height: self.minimum_height 
+    size_hint_y: None
+  
+<LineL>:
+    markup: True
+    color: 0,0,0,1 
+    text_size:self.size
+    halign: 'center'
+    valign: "middle"
+
+#---------------The form window includes new user form, this window added if it is nessecary:-----------------------------------------------------------------------------------------
+
+<FormWindow>:
+    size_hint:.7,1
+    BoxLayout:
+        orientation:"vertical"
+        BoxLayout:
+            canvas.before:
+                Color:
+                    rgba: (0.9254901960784314, 0.9294117647058824, 0.9294117647058824, 1) 
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [5]
+            BoxLayout:
+                size_hint:.1,1
+            MyLabel:
+                font_size: self.height/4
+                text:"New User"
+                bold: True
+        BoxLayout:
+            size_hint:1,.12
+        BoxLayout:
+            BoxLayout:
+                size_hint:.5,1
+                MyLabel:
+                    text:"Username:"
+            BoxLayout:
+                orientation:"vertical"
+                BoxLayout:
+                    size_hint:1,0.5
+                MyTextInput:
+                    id:Username
+                    hint_text:"Username"
+                BoxLayout:
+                    size_hint:1,0.5
+        BoxLayout:
+            size_hint:1,.12 
+        BoxLayout:
+            BoxLayout:
+                size_hint:.5,1
+                MyLabel:
+                    text:"Display Name:"
+            BoxLayout:
+                orientation:"vertical"
+                BoxLayout:
+                    size_hint:1,0.5
+                MyTextInput:
+                    id:DisplayName     
+                    hint_text:"Display Name"
+                BoxLayout:
+                    size_hint:1,0.5
+        BoxLayout:
+            size_hint:1,.12 
+        BoxLayout:
+            BoxLayout:
+                size_hint:.5,1
+                MyLabel:
+                    text:"Phone:"
+            BoxLayout:
+                orientation:"vertical"
+                BoxLayout:
+                    size_hint:1,0.5
+                MyTextInput:
+                    id:Phone
+                    hint_text:"Phone"
+                BoxLayout:
+                    size_hint:1,0.5
+        BoxLayout:
+            size_hint:1,.12 
+        BoxLayout:
+            BoxLayout:
+                size_hint:.5,1
+                MyLabel:
+                    text:"Email:"
+            BoxLayout:
+                orientation:"vertical"
+                BoxLayout:
+                    size_hint:1,0.5
+                MyTextInput:
+                    id:Email
+                    hint_text:"Email"
+                BoxLayout:
+                    size_hint:1,0.5
+        BoxLayout:
+            size_hint:1,.12
+        BoxLayout:
+            BoxLayout:
+                size_hint:.5,1
+                MyLabel:
+                    text:"User Roles:"
+            BoxLayout:
+                orientation:"vertical"
+                BoxLayout:
+                    size_hint:1,0.5
+                MySpinner:
+                    id:UserRole
+                    text:"Sellect a User Role"
+                BoxLayout:
+                    size_hint:1,0.5
+        BoxLayout:
+            size_hint:1,.12 
+        BoxLayout:
+            BoxLayout:
+                size_hint:.5,1
+                MyLabel:
+                    text:"Enabled:"
+            BoxLayout:
+                orientation:"horizontal"
+                BoxLayout:
+                    size_hint:.1,1
+                BoxLayout:
+                    orientation:"vertical"
+                    BoxLayout:
+                        size_hint:1,0.5
+                    BoxLayout:
+                        CheckBox:
+                            size_hint:.1,1
+                            id:Enable
+                            halign: 'center'
+                            color: 1,0,0,1
+                        BoxLayout:
+                    BoxLayout:
+                        size_hint:1,0.5
+                MyButton:
+                    text:"Back"
+        BoxLayout:
+            size_hint:1,.12
+
+
+#--------------------------------------------------------------------------------------------------------
+
+
+
+
+<SideSpace>:
+    size_hint:.05,1
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)   
+
+<MyButton>:           
+    colon : (0,0,0,1)
+    colok:(0.5450980392156862, 0.803921568627451, 0.803921568627451, 1)
+    pos_hint:{"center_y":.5}
+    background_color: (0,0,0,0)
+    color: self.colon
+    size_hint:1,0.8
+    font_size: self.height/3
+    always_release: True
+    canvas.before:
+        Color:
+            rgba:  self.colok
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [10]
+    on_press: root.action1()
+    on_press: app.root.press(self.text)
+    on_release: app.root.release(self.text)
+    on_release: root.action2()
+
+<HeaderButton>: 
+    background_color: (1,1,1,1)
+    color: (1,1,1,1)
+    on_press: app.root.filter(self.text)
+    on_press: root.action1()
+    on_release: root.action2()
+
+
+<ListHeader>:
+    orientation: "vertical"
+    BoxLayout:
+        orientation:"horizontal"
+        BoxLayout:
+            size_hint:.03,1
+        HeaderButton:
+            size_hint:.15,1
+            text:"ID"         
+        HeaderButton:
+            size_hint:.8,1
+            text:"User Name"            
+        HeaderButton:
+            size_hint:0.8,1
+            text:"Email"            
+        HeaderButton:
+            size_hint:.3,1
+            text:"Enable"
+        BoxLayout:  
+            size_hint: .03,1 
+
+
+<HeaderLabel@Label>:
+    bold: True
+    markup: True
+    font_size: self.height/3
+    color: 0,0,0,1 
+    text_size:self.size
+    halign: 'center'
+    valign: "middle"
+
+<MyLabel@Label>:
+    halign: 'left'
+    valign: 'center'
+    text_size : self.size
+    font_size: self.height/5
+    color: 0,0,0,1
+
+<MyTextInput@TextInput>:
+    halign: 'left'
+    valign: 'center'
+    text_size : self.size  
+    background_color: (0.8784313725490196, 0.8823529411764706, 0.8823529411764706, .3)
+    cursor_color: 0,0,0,1
+    multiline: False
+
+<MySpinner>:
+    values: root.UserRoles
+    background_color: (0,0,0,0)
+    color:(0,0,0,1)
+    canvas.before:
+        Color:
+            rgba: (0.9254901960784314, 0.9294117647058824, 0.9294117647058824, 1) 
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [5]
+
+<SpinnerOptions>:    
+    background_color: (0,0,0,0)
+    color: (0,0,0,1)
+    size_hint:1,None
+    height:"30dp"
+    canvas.before:
+        Color:
+            rgba: (0.9254901960784314, 0.9294117647058824, 0.9294117647058824, 1) 
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [5]
+        Color: 
+            rgba: (0.5450980392156862, 0.803921568627451, 0.803921568627451, 1)
+        Line:
+            rounded_rectangle: (self.pos[0],self.pos[1],self.size[0],self.size[1],5,5,5,5,600)
+            width:.5
+
+
+<Complete>:
+    background_color: (0,0,0,0)
+    color: (1,1,1,1)
+    title:" "
+    separator_color: (1,1,1,0)
+    size_hint:(.3,.5)
+    auto_dismiss:False
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: (0.9254901960784314, 0.9294117647058824, 0.9294117647058824, 1) 
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius: [20]
+        BoxLayout:
+            size_hint: 1,.2
+        Label:
+            color:(0,0,0,1)
+            text:"Please Complete \n New User Form"
+            bold: True
+            halign: 'center'
+            valign: 'center'
+            text_size : self.size
+        BoxLayout:
+            size_hint: .5, .5
+            pos_hint:{"center_x":.5}
+            orientation:"horizontal"    
+            MyButton:
+                id:exl
+                pos_hint:{"center_x":.5}
+                text: "OK"
+                color:(0,0,0,1)
+                font_size: self.width/10
+                on_release:root.dismiss()
+        BoxLayout:
+            size_hint: 1, .2
+
+
+<Saved>:
+    background_color: (0,0,0,0)
+    color: (1,1,1,1)
+    title:" "
+    separator_color: (1,1,1,0)
+    size_hint:(.3,.5)
+    auto_dismiss:False
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: (0.9254901960784314, 0.9294117647058824, 0.9294117647058824, 1) 
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius: [20]
+        BoxLayout:
+            size_hint: 1,.2
+        Label:
+            color:(0,0,0,1)
+            text:"New User\nSaved Successfully"
+            bold: True
+            halign: 'center'
+            valign: 'center'
+            text_size : self.size
+        BoxLayout:
+            size_hint: .5, .5
+            pos_hint:{"center_x":.5}
+            orientation:"horizontal"    
+            MyButton:
+                id:exl
+                pos_hint:{"center_x":.5}
+                text: "OK"
+                color:(0,0,0,1)
+                font_size: self.width/10
+                on_release:root.dismiss()
+        BoxLayout:
+            size_hint: 1, .2
+
+
